@@ -1,0 +1,38 @@
+@page "{id:int}"
+@model BlogApp.Pages.Categories.DetailsModel
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<h2>Category Details</h2>
+
+@if (Model.Category != null)
+{
+    <div class="card mt-3">
+        <div class="card-body">
+            <h4 class="card-title">@Model.Category.Name</h4>
+            <p class="text-muted mb-2">Posts: @Model.Category.Posts.Count</p>
+
+            @if (Model.Category.Posts.Count > 0)
+            {
+                <h5 class="mt-3">Posts in this category</h5>
+                <ul>
+                    @foreach (var post in Model.Category.Posts.OrderByDescending(p => p.Id))
+                    {
+                        <li>
+                            <a asp-page="/Posts/Details" asp-route-id="@post.Id">@post.Title</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a class="btn btn-warning btn-sm" asp-page="/Categories/Edit" asp-route-id="@Model.Category.Id">Edit</a>
+        <a class="btn btn-danger btn-sm" asp-page="/Categories/Delete" asp-route-id="@Model.Category.Id">Delete</a>
+        <a class="btn btn-secondary btn-sm" asp-page="/Categories/Index">Back to List</a>
+    </div>
+}
+

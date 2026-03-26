@@ -1,0 +1,38 @@
+@page
+@model BlogApp.Pages.Posts.IndexModel
+
+@{
+    ViewData["Title"] = "Posts";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="mb-0">Posts</h2>
+    <a class="btn btn-primary" asp-page="/Posts/Create">Create New Post</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var post in Model.Posts)
+        {
+            <tr>
+                <td>@post.Title</td>
+                <td>@post.Author?.Name</td>
+                <td>@post.Category?.Name</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-secondary" asp-page="/Posts/Details" asp-route-id="@post.Id">Details</a>
+                    <a class="btn btn-sm btn-warning" asp-page="/Posts/Edit" asp-route-id="@post.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-page="/Posts/Delete" asp-route-id="@post.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

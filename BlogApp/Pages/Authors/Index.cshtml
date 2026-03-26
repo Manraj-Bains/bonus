@@ -1,0 +1,36 @@
+@page
+@model BlogApp.Pages.Authors.IndexModel
+
+@{
+    ViewData["Title"] = "Authors";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="mb-0">Authors</h2>
+    <a class="btn btn-primary" asp-page="/Authors/Create">Create New Author</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Posts</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var author in Model.Authors)
+        {
+            <tr>
+                <td>@author.Name</td>
+                <td>@author.Posts.Count</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-secondary" asp-page="/Authors/Details" asp-route-id="@author.Id">Details</a>
+                    <a class="btn btn-sm btn-warning" asp-page="/Authors/Edit" asp-route-id="@author.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-page="/Authors/Delete" asp-route-id="@author.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

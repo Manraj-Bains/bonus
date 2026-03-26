@@ -1,0 +1,36 @@
+@page
+@model BlogApp.Pages.Categories.IndexModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="mb-0">Categories</h2>
+    <a class="btn btn-primary" asp-page="/Categories/Create">Create New Category</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Posts</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Posts.Count</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-secondary" asp-page="/Categories/Details" asp-route-id="@category.Id">Details</a>
+                    <a class="btn btn-sm btn-warning" asp-page="/Categories/Edit" asp-route-id="@category.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-page="/Categories/Delete" asp-route-id="@category.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,28 @@
+@page "{id:int}"
+@model BlogApp.Pages.Posts.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Post";
+}
+
+<h2>Delete Post</h2>
+
+@if (Model.Post != null)
+{
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Post.Title</h5>
+            <p class="text-muted">
+                By @Model.Post.Author?.Name in @Model.Post.Category?.Name
+            </p>
+            <p class="card-text">@Model.Post.Content</p>
+        </div>
+    </div>
+
+    <form method="post" class="mt-3">
+        <input type="hidden" name="id" value="@Model.Post.Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-page="/Posts/Index" class="btn btn-secondary">Back to List</a>
+    </form>
+}
+
